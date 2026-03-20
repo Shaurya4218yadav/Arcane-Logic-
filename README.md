@@ -53,7 +53,7 @@ We use a **co-contribution (B2B2C) model** to balance affordability and platform
 
 ---
 
-### 📊 Actuarial Logic
+### Actuarial Logic
 
 Expected Payout = Weekly Earnings × Disruption Probability × Expected Loss %
 
