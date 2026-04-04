@@ -4,6 +4,7 @@
 .DS_Store
 *.pem
 .env*
+!frontend/.env.production
 .vercel
 
 # =========================
