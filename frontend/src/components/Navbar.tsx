@@ -12,6 +12,8 @@ export default function Navbar() {
   const getPath = (link: string) => {
     if (link === "Dashboard") return "/";
     if (link === "Disruption Impact") return "/disruption";
+    if (link === "My Plan") return "/policy";
+    if (link === "Claims") return "/claims";
     if (link === "History") return "/history";
     return "/";
   };
@@ -35,12 +37,12 @@ export default function Navbar() {
           </Link>
 
           {/* Nav Links */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link}
                 href={getPath(link)}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                   isActive(link)
                     ? "bg-white/10 text-white shadow-sm"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
@@ -59,19 +61,17 @@ export default function Navbar() {
             <span className="text-xs font-medium text-emerald-400">Active Protection</span>
           </div>
 
-          <div className="hidden sm:block text-right">
-            <p className="text-xs font-semibold text-slate-200">Arjun K.</p>
-            <p className="text-[10px] text-slate-500 font-mono tracking-wide mt-0.5">DL-2847 · Chennai</p>
-          </div>
-
-          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-slate-700 flex items-center justify-center text-xs font-bold text-slate-300">
-            AK
-          </div>
+          <Link
+            href="/register"
+            className="hidden sm:flex px-4 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-xs font-semibold text-cyan-400 hover:bg-cyan-500/20 transition-colors"
+          >
+            Register
+          </Link>
         </div>
       </div>
 
       {/* Mobile nav */}
-      <div className="md:hidden flex items-center gap-1 px-6 pb-3 overflow-x-auto">
+      <div className="lg:hidden flex items-center gap-1 px-6 pb-3 overflow-x-auto">
         {NAV_LINKS.map((link) => (
           <Link
             key={link}

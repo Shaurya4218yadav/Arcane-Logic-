@@ -2,9 +2,9 @@
 
 import { Scenario, HistoryItem } from "./types";
 
-export const NAV_LINKS = ["Dashboard", "Disruption Impact", "History"] as const;
+export const NAV_LINKS = ["Dashboard", "Disruption Impact", "My Plan", "Claims", "History"] as const;
 
-// Chennai disruption scenarios
+// Chennai disruption scenarios — 5 automated triggers
 export const SCENARIOS: Scenario[] = [
   {
     id: "flood",
@@ -35,6 +35,26 @@ export const SCENARIOS: Scenario[] = [
     disruption_type: "waterlog",
     lat: 12.9758,
     lon: 80.2205,
+  },
+  {
+    id: "heavy_rain",
+    label: "Persistent Heavy Rain",
+    icon: "⛈️",
+    zone: "Perungudi",
+    detail: "Continuous heavy rainfall — reduced visibility & flooded underpasses",
+    disruption_type: "heavy_rain",
+    lat: 12.9611,
+    lon: 80.2470,
+  },
+  {
+    id: "area_shutdown",
+    label: "Area Shutdown Notice",
+    icon: "🚧",
+    zone: "Sholinganallur",
+    detail: "Localized shutdown — all deliveries paused by authorities",
+    disruption_type: "area_shutdown",
+    lat: 12.9010,
+    lon: 80.2279,
   },
 ];
 
@@ -106,4 +126,13 @@ export const CHENNAI_ZONES = [
   "Tambaram",
   "Perungudi",
   "Sholinganallur",
+];
+
+// Delivery platforms
+export const DELIVERY_PLATFORMS = [
+  { id: "zepto", label: "Zepto", icon: "⚡" },
+  { id: "blinkit", label: "Blinkit", icon: "🟡" },
+  { id: "swiggy", label: "Swiggy Instamart", icon: "🟠" },
+  { id: "dunzo", label: "Dunzo", icon: "🟢" },
+  { id: "other", label: "Other", icon: "📦" },
 ];

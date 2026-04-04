@@ -68,7 +68,7 @@ export interface HistoryItem {
   audit_reason: string;
 }
 
-export type NavPage = "Dashboard" | "Disruption Impact" | "History";
+export type NavPage = "Dashboard" | "Disruption Impact" | "My Plan" | "Claims" | "History";
 
 export interface Scenario {
   id: string;

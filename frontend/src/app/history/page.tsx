@@ -17,13 +17,13 @@ export default function HistoryPage() {
         const auditLogs = await getAuditTrail();
         if (auditLogs && auditLogs.length > 0) {
           // Map backend AuditLog to frontend HistoryItem
-          const mapped = auditLogs.map((log) => ({
+          const mapped: HistoryItem[] = auditLogs.map((log) => ({
             date: new Date(log.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }),
-            event: "Disruption Event (from API)", // We could extract better info if we joined tables
-            zone: "Chennai", // Defaulting as audit_log doesn't store zone directly
+            event: "Disruption Event (from API)",
+            zone: "Chennai",
             score: log.trust_score,
-            payout: log.decision === "APPROVED" ? "₹X" : "—", // Simplification for demo
-            status: log.decision === "APPROVED" ? "paid" : log.decision === "FLAGGED" ? "flagged" : "review",
+            payout: log.decision === "APPROVED" ? "₹X" : "—",
+            status: (log.decision === "APPROVED" ? "paid" : log.decision === "FLAGGED" ? "flagged" : "review") as "paid" | "review" | "flagged",
             audit_reason: log.reason
           }));
           // Combine API data with demo data
@@ -72,7 +72,7 @@ export default function HistoryPage() {
           <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
         </div>
       ) : (
-        <HistoryTable items={items as any} />
+        <HistoryTable items={items} />
       )}
       
       <div className="mt-8 p-4 rounded-xl border border-slate-800 bg-slate-900/50 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
