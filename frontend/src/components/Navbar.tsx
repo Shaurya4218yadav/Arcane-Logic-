@@ -15,6 +15,7 @@ export default function Navbar() {
     if (link === "My Plan") return "/policy";
     if (link === "Claims") return "/claims";
     if (link === "History") return "/history";
+    if (link === "Admin Command") return "/admin";
     return "/";
   };
 

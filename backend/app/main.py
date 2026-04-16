@@ -9,7 +9,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger("vayuguard")
 
 # import routers
-from app.api import auth, policies, events, claims, video, earnings, audit, simulation
+from app.api import auth, policies, events, claims, video, earnings, audit, simulation, fraud, payouts, admin
 
 # Log DB URL (mask password)
 _safe_url = DATABASE_URL
@@ -40,7 +40,10 @@ app.include_router(claims.router, prefix="/claims", tags=["claims"])
 app.include_router(video.router, prefix="/video", tags=["video"])
 app.include_router(earnings.router, prefix="/earnings", tags=["earnings"])
 app.include_router(audit.router, prefix="/audit", tags=["audit"])
+app.include_router(admin.router, prefix="/admin", tags=["admin"])
 app.include_router(simulation.router, prefix="/simulation", tags=["simulation"])
+app.include_router(fraud.router, prefix="/fraud", tags=["fraud"])
+app.include_router(payouts.router, prefix="/payouts", tags=["payouts"])
 
 
 @app.get("/health")

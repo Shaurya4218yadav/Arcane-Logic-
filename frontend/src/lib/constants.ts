@@ -2,7 +2,7 @@
 
 import { Scenario, HistoryItem } from "./types";
 
-export const NAV_LINKS = ["Dashboard", "Disruption Impact", "My Plan", "Claims", "History"] as const;
+export const NAV_LINKS = ["Dashboard", "Disruption Impact", "My Plan", "Claims", "History", "Admin Command"] as const;
 
 // Chennai disruption scenarios — 5 automated triggers
 export const SCENARIOS: Scenario[] = [

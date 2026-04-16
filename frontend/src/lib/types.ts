@@ -77,6 +77,25 @@ export interface Scenario {
   zone: string;
   detail: string;
   disruption_type: string;
-  lat: number;
   lon: number;
+}
+
+export interface FraudResult {
+  is_fraud: boolean;
+  fraud_score: number;
+  details: {
+    weather_mismatch: boolean;
+    actual_weather: string;
+    speed_anomaly: boolean;
+    ml_prediction: string;
+  };
+}
+
+export interface AdminMetrics {
+  total_claims_paid: number;
+  total_premiums_collected: number;
+  loss_ratio: number;
+  fraud_rate: number;
+  weekly_prediction: number;
+  recent_anomalies: number;
 }

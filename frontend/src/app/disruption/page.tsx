@@ -36,6 +36,19 @@ export default function DisruptionImpactPage() {
       setSimulationResult(result);
       setIsSimulating(false);
 
+      if (result.payout_eligible && result.payout > 0) {
+        // Trigger simulated instant payout
+        try {
+          await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/payouts/trigger`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ worker_id: 101, amount: result.payout })
+          });
+        } catch (e) {
+          console.error("Payout trigger failed", e);
+        }
+      }
+
       if (result.requires_verification) {
         setTimeout(() => setShowVideo(true), 1500);
       }

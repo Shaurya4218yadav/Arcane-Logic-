@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import EarningsFloorCard from "@/components/EarningsFloorCard";
 import TrustScoreCard from "@/components/TrustScoreCard";
 import PremiumCard from "@/components/PremiumCard";
+import PredictionCard from "@/components/PredictionCard";
 import HistoryTable from "@/components/HistoryTable";
 import { getEarningsDashboard, getAuditTrail, runSimulation } from "@/lib/api";
 import type { EarningsDashboard, HistoryItem, SimulationResult, TrustResult } from "@/lib/types";
@@ -85,7 +86,7 @@ export default function Dashboard() {
         disruption_type={dashboardData.disruption_type}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <TrustScoreCard
           overall={trustData?.overall || 91}
           signals={trustData?.signals || {
@@ -97,6 +98,7 @@ export default function Dashboard() {
           premium={dashboardData.dynamic_premium}
           reasoning={dashboardData.premium_reasoning}
         />
+        <PredictionCard predicted_earnings={dashboardData.predicted_earnings} />
       </div>
 
       <div className="pt-6">
