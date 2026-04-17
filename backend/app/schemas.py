@@ -39,8 +39,8 @@ class PolicyOut(BaseModel):
 
 
 class EventCreate(BaseModel):
-    lat: float
-    lon: float
+    lat: Optional[float] = 13.0827
+    lon: Optional[float] = 80.2707
 
 
 class EventOut(BaseModel):

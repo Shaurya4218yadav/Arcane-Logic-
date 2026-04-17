@@ -77,6 +77,7 @@ export interface Scenario {
   zone: string;
   detail: string;
   disruption_type: string;
+  lat: number;
   lon: number;
 }
 
