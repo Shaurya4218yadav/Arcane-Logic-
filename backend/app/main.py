@@ -19,11 +19,26 @@ logger.info(f"DATABASE_URL = {_safe_url}")
 
 try:
     Base.metadata.create_all(bind=engine)
-    logger.info("✅ Database tables created successfully")
+    logger.info("Database tables created successfully")
 except Exception as e:
-    logger.error(f"❌ Database connection failed: {e}")
+    logger.error(f"Database connection failed: {e}")
 
-app = FastAPI(title="VayuGuard Backend", description="AI-Powered Income Stabilization Engine for Gig Workers")
+from contextlib import asynccontextmanager
+import asyncio
+from app.tasks import run_background_orchestrator
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Start auto-payout claim checker
+    task = asyncio.create_task(run_background_orchestrator())
+    yield
+    task.cancel()
+
+app = FastAPI(
+    title="VayuGuard Backend",
+    description="AI-Powered Income Stabilization Engine for Gig Workers",
+    lifespan=lifespan
+)
 
 app.add_middleware(
     CORSMiddleware,

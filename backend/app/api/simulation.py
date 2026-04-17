@@ -130,9 +130,22 @@ def run_simulation(
         },
     })
 
+    # ── Verify Policy Lock-In ──
+    from datetime import datetime
+    policy = crud.get_policy_for_user(db, current_user.id)
+    policy_active = False
+    audit_reason_extra = ""
+    if policy:
+        if policy.activation_date and policy.activation_date > datetime.utcnow():
+            audit_reason_extra = " (Blocked: 24h Cooling Period)"
+        else:
+            policy_active = True
+    else:
+        audit_reason_extra = " (No Active Policy)"
+
     # ── Step 5: Claims Engine ──
-    payout = earnings_data["gap_covered"]
-    payout_eligible = event_result["triggered"] and payout > 0
+    payout = earnings_data["gap_covered"] if policy_active else 0
+    payout_eligible = event_result["triggered"] and payout > 0 and policy_active
     requires_verification = trust_result["tier"] == "MEDIUM"
 
     if trust_result["tier"] == "LOW":
@@ -163,7 +176,7 @@ def run_simulation(
         audit_parts.append(f"inactivity deviation {event_result['behavioral']['inactivity_deviation']}%")
     audit_parts.append(f"trust score {trust_result['overall']}")
 
-    audit_reason = f"Auto Adjustment {decision.lower()}: {' + '.join(audit_parts)}"
+    audit_reason = f"Auto Adjustment {decision.lower()}: {' + '.join(audit_parts)}{audit_reason_extra}"
 
     upi_message = ""
     if payout_eligible and decision == "APPROVED":

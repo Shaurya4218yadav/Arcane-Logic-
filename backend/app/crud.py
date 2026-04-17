@@ -22,7 +22,8 @@ def create_user(db: Session, phone: str, platform: str = None, city: str = "Chen
 
 
 def create_policy(db: Session, user_id: int, premium: float, coverage: float, reasoning: str = ""):
-    p = models.Policy(user_id=user_id, premium=premium, coverage=coverage, premium_reasoning=reasoning)
+    activation = datetime.utcnow() + timedelta(hours=24)
+    p = models.Policy(user_id=user_id, premium=premium, coverage=coverage, premium_reasoning=reasoning, activation_date=activation)
     db.add(p)
     db.commit()
     db.refresh(p)

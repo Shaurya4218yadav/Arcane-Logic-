@@ -152,7 +152,7 @@ export default function DisruptionImpactPage() {
 
           {!isSimulating && activeSteps.length === 0 && (
             <div className="absolute inset-0 flex items-center justify-center bg-slate-900/60 backdrop-blur-[2px] rounded-2xl z-20">
-              <p className="text-sm text-slate-400 font-medium tracking-wide">Waiting for disruption trigger...</p>
+              <p className="text-sm text-slate-400 font-medium tracking-wide">Waiting for simulation... Trigger a scenario on the left to begin.</p>
             </div>
           )}
         </div>

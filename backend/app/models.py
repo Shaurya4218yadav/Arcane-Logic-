@@ -27,6 +27,8 @@ class Policy(Base):
     coverage = Column(Float, default=1000.0)
     status = Column(String, default="ACTIVE")
     premium_reasoning = Column(String, default="")
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    activation_date = Column(DateTime(timezone=True), nullable=True)
     user = relationship("User", back_populates="policies")
 
 

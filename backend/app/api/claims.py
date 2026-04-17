@@ -23,6 +23,11 @@ def create_claim(payload: ClaimCreate, db: Session = Depends(get_db_dep), curren
     risk = fraud_svc.compute_fraud_score(db, current_user, ip, gps_mismatch, lat=lat, lon=lon)
 
     policy = crud.get_policy_for_user(db, current_user.id)
+    
+    from datetime import datetime
+    if policy and policy.activation_date and policy.activation_date > datetime.utcnow():
+        raise HTTPException(status_code=403, detail="Policy is currently in its 24-hour cooling period. Wait before claiming.")
+
     payout = 0.0
     status = "PENDING"
 
